@@ -1,4 +1,4 @@
-import config from './config'
+import config from './firebaseConfig'
 import firebase from 'firebase'
 firebase.initializeApp(config)
 
