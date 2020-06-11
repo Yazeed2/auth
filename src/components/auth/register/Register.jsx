@@ -1,30 +1,33 @@
 import React, { useState } from 'react'
 import {register} from '../../../firebase/auth'
+import {alertError, alertSuccess} from '../../alerts/alerts'
+import {passwordDoesntMatch, requiredFields} from '../../alerts/Messages/error'
 
 
 export default function Register() {
-    const [state, setState] = useState({})
+    const [userInfo, setUserInfo] = useState({})
 
     const onChange = (e) => {
-        setState({...state, [e.target.name]:e.target.value})
+        setUserInfo({...userInfo, [e.target.name]:e.target.value})
     }
-    const required = ['email', 'password', 'repeatPassword']
+    const required = ['email', 'password', 'repeatPassword'] // add your required fields
     const onSubmit = () => {
-        let missingElements = []
-        required.forEach(element => {
-           if(state[element]) missingElements.push(element)
+        let missingFields = []
+        required.forEach(field => {
+           if(!userInfo[field]) missingFields.push(field)
         })
-        if(missingElements.length){
-            if(state.password === state.repeatPassword){
-                register(state.email, state.password)
+        if(missingFields.length === 0){
+            if(userInfo.password === userInfo.repeatPassword){
+                register(userInfo);
             }else{
-                // error password does not match
+                alertError(passwordDoesntMatch);
             }
         }else{ 
             //error missig elements are
-            alert('nope') // change this later pls :) 
+            alertError(requiredFields);
         }
     }
+
     return (
         <div>
             register <br/>

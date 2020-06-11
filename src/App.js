@@ -21,8 +21,9 @@ function App() {
           </nav>
      <Switch>
       
-     <Route path='/login' render={Login} />
-     <Route path='/register' render={Register} />
+     <Route path='/login'> <Login/> </Route>
+     <Route path='/register'> <Register/> </Route>
+
 
     
      </Switch>

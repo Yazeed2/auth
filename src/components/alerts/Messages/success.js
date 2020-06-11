@@ -1,0 +1,1 @@
+export const registerCompleted = 'You are now registered successfully'
