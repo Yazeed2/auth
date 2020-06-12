@@ -2,23 +2,34 @@ import React, { useState } from 'react'
 import {register} from '../../../firebase/auth'
 import {alertError, alertSuccess} from '../../alerts/alerts'
 import {passwordDoesntMatch, requiredFields} from '../../alerts/Messages/error'
+import {connect} from 'react-redux'; 
+import {setUserInfoAction} from '../authActions'
 
 
-export default function Register() {
+
+const mapState = (state) => ({
+    data : state.auth
+})
+const actions = {
+    setUserInfoAction
+}
+
+function Register() {
     const [userInfo, setUserInfo] = useState({})
 
     const onChange = (e) => {
         setUserInfo({...userInfo, [e.target.name]:e.target.value})
     }
     const required = ['email', 'password', 'repeatPassword'] // add your required fields
-    const onSubmit = () => {
+    const onSubmit = async() => {
         let missingFields = []
         required.forEach(field => {
            if(!userInfo[field]) missingFields.push(field)
         })
         if(missingFields.length === 0){
             if(userInfo.password === userInfo.repeatPassword){
-                register(userInfo);
+                const userInfo = await register(userInfo);
+                setUserInfoAction(userInfo)
             }else{
                 alertError(passwordDoesntMatch);
             }
@@ -42,3 +53,4 @@ export default function Register() {
 }
 
 
+export default connect(mapState, actions)(Register)

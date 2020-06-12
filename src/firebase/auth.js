@@ -13,7 +13,7 @@ export const register = async (userInfo) => {
         firestore.collection('users').doc(uid).set({...userInfo})
         .then(done =>{
             alertSuccess(registerCompleted);
-            Promise.resolve(true);
+            Promise.resolve(userInfo);
         })
         .catch(err=> {
             console.log('%c '+ err.message, 'background: #000; color: red');
@@ -29,6 +29,8 @@ export const register = async (userInfo) => {
         var errorMessage = error.message;
         console.log(errorMessage);
         alertError(errorMessage);
+        Promise.reject(new Error(errorMessage))
         // ...
       });
 }
+
