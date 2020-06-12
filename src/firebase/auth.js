@@ -3,7 +3,7 @@ import {auth, firestore} from './firebase';
 import {alertError, alertSuccess} from '../components/alerts/alerts'; 
 import {registerCompleted} from '../components/alerts/Messages/success';
 
-export const register = async (userInfo) => {
+export const register = (userInfo) => new Promise( async (resolve, reject)=>{
     const {email, password} = userInfo;
     auth.createUserWithEmailAndPassword(email, password)
     .then(userSnap => {
@@ -12,16 +12,14 @@ export const register = async (userInfo) => {
         const uid = userSnap.user.uid;
         firestore.collection('users').doc(uid).set({...userInfo})
         .then(done =>{
+            resolve(userInfo);
             alertSuccess(registerCompleted);
-            Promise.resolve(userInfo);
         })
         .catch(err=> {
             console.log('%c '+ err.message, 'background: #000; color: red');
             alertError(err.message);
-            Promise.reject(new Error(err.message));
-
+            reject(err.message);
         })
- 
     }) 
     .catch(function(error) {
         // Handle Errors here.
@@ -29,8 +27,7 @@ export const register = async (userInfo) => {
         var errorMessage = error.message;
         console.log(errorMessage);
         alertError(errorMessage);
-        Promise.reject(new Error(errorMessage))
+        reject(errorMessage)
         // ...
       });
-}
-
+})

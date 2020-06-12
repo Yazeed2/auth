@@ -14,7 +14,7 @@ const actions = {
     setUserInfoAction
 }
 
-function Register() {
+function Register(props) {
     const [userInfo, setUserInfo] = useState({})
 
     const onChange = (e) => {
@@ -28,8 +28,9 @@ function Register() {
         })
         if(missingFields.length === 0){
             if(userInfo.password === userInfo.repeatPassword){
-                const userInfo = await register(userInfo);
-                setUserInfoAction(userInfo)
+                let user = await register(userInfo)
+
+                props.setUserInfoAction(user)
             }else{
                 alertError(passwordDoesntMatch);
             }
@@ -39,6 +40,7 @@ function Register() {
         }
     }
 
+    
     return (
         <div>
             register <br/>
