@@ -35,7 +35,7 @@ function App(props) {
       
      <Route path='/login'> <Login/> </Route>
      <Route path='/register'> <Register/> </Route>
-     <Route path='/register'> <Home/> </Route>
+     <Route path='/'> <Home/> </Route>
 
 
     
