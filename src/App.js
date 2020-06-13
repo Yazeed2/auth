@@ -3,7 +3,7 @@ import {Switch, Route, Link} from 'react-router-dom'
 import Login from './components/auth/login/Login';
 import Register from './components/auth/register/Register';
 import Home from './components/home/Home'
-import {onAuthStateChange} from './firebase/auth'
+import {onAuthStateChange, signOut} from './firebase/auth'
 import {connect} from 'react-redux'
 import {setUserInfoAction} from './components/auth/authActions'
 import Loading from './components/loading/Loading';
@@ -33,8 +33,8 @@ function App(props) {
               <Link to="/">Home</Link>
             </li>
             {isLoggedIn?
-            <li>logout</li>
-            : 
+            <button onClick={signOut}>logout</button>
+            :
             <>
             <li>
               <Link to="/login">login</Link>

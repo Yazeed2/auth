@@ -59,3 +59,5 @@ export const onAuthStateChange = (setUserInfo, authState) => new Promise(async(r
          }
      })
 })
+
+export const signOut = () => auth.signOut()
