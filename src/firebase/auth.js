@@ -13,6 +13,7 @@ export const register = (userInfo) => new Promise( async (resolve, reject)=>{
         const uid = userSnap.user.uid;
         firestore.collection('users').doc(uid).set({...userInfo})
         .then(done =>{
+            userInfo.uid = uid
             resolve(userInfo);
             alertSuccess(registerCompleted);
         })
@@ -33,31 +34,8 @@ export const register = (userInfo) => new Promise( async (resolve, reject)=>{
       });
 })
 
-export const onAuthStateChange = (setUserInfo, authState) => new Promise(async(resolve, reject) => { 
-     // on auth state changes 
-     auth.onAuthStateChanged(async(user)=>{ 
-         if(user){
-            // user is logged in 
-            // check if the global store has a user and fetch the data if not 
-            if(authState.userInfo){
-                // userInfo is saved in the global state
-                resolve({loggedIn: true})    
-            }else{
-                // get user data from the database
-                let uid = user.uid
-                let userInfo = await firestore.collection('users').doc(uid).get()
-                userInfo = userInfo.data()
-                userInfo.uid = uid
-                setUserInfo(userInfo)
-                resolve({loggedIn: true})
-            }
-            
-            
-         }else{
-            // user is not logged in
-            resolve({loggedIn : false})
-         }
-     })
-})
 
-export const signOut = () => auth.signOut()
+export const signOut = async(setUserInfo) => {
+    await auth.signOut()
+    setUserInfo({userInfo:undefined})
+}

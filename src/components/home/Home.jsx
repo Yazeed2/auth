@@ -7,7 +7,7 @@ const Home = ({userInfo}) => {
     return (
         <div>
             
-    {userInfo? <>
+    {userInfo !=undefined? <>
         email: {userInfo.email} <br/> 
         uid : {userInfo.uid}
      </>: 'please login or register'} 
