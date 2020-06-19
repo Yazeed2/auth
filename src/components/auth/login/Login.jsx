@@ -1,14 +1,40 @@
 import React, {useState}from 'react'
+import {alertError} from '../../alerts/alerts'
+import {loginInfoMissing} from '../../alerts/Messages/error'
+import {login} from '../../../firebase/auth'
+import Loading from '../../loading/Loading'
 
 export default function Login() {
 
- const [state, setstate] = useState(0)
+ const [userInfo, setUserInfo] = useState({})
+ const [loading, setLoading] = useState(false)
+ const onFeildChange = (e)=> {
+    setUserInfo({...userInfo, [e.target.name]: e.target.value})
+ }
+ const onSubmit = async(e) => { 
+     e.preventDefault()
+    if(userInfo.password && userInfo.email){ 
+        setLoading(true)
+        try{
+
+            await login(userInfo)
+        }catch { 
+
+        }
+        setLoading(false)
+    }else{
+        alertError(loginInfoMissing)
+    }
+ }
     return (
         <div>
-            login <br/>
-           <input name="Email" placeholder="Email" type="text"/> <br/>
-            <input name="password" placeholder="password" type="password"/> <br/>
-            <button>Login</button>
+            login 
+            {loading? <Loading/>: ''}
+            <form onSubmit={onSubmit} >
+           <input onChange={onFeildChange} name="email" placeholder="Email" type="email"/> <br/>
+            <input onChange={onFeildChange} name="password" placeholder="password" type="password"/> <br/>
+            <button className={loading? 'loading': ''} >login</button>
+            </form>
 
         </div>
     )

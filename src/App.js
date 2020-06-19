@@ -1,4 +1,5 @@
 import React,{useEffect, useState} from 'react';
+import './App.css';
 import {Switch, Route, Link} from 'react-router-dom'
 import Login from './components/auth/login/Login';
 import Register from './components/auth/register/Register';

@@ -25,7 +25,6 @@ export const register = (userInfo) => new Promise( async (resolve, reject)=>{
     }) 
     .catch(function(error) {
         // Handle Errors here.
-        var errorCode = error.code;
         var errorMessage = error.message;
         console.log(errorMessage);
         alertError(errorMessage);
@@ -39,3 +38,14 @@ export const signOut = async(setUserInfo) => {
     await auth.signOut()
     setUserInfo({userInfo:undefined})
 }
+
+export const login = async ({email, password}) => new Promise( async (resolve, reject)=> {
+    try{ 
+        await auth.signInWithEmailAndPassword(email, password)
+        resolve(true)
+    }catch(err){
+        alertError(err.message)
+        reject(err.messageCode)
+    }
+  
+})
