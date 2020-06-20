@@ -22,6 +22,8 @@ function Register(props) {
     }
     const required = ['email', 'password', 'repeatPassword'] // add your required fields
     const onSubmit = async() => {
+        e.preventDefault()
+
         let missingFields = []
         required.forEach(field => {
            if(!userInfo[field]) missingFields.push(field)
@@ -44,12 +46,14 @@ function Register(props) {
     return (
         <div>
             register <br/>
+            <form onSubmit={onSubmit}>
            <input name="email" placeholder="Email" type="text" onChange={onChange} /> <br/>
            <input name="moreData" placeholder="moreData" type="text" onChange={onChange} /> <br/>
            <input name="addional" placeholder="addional" type="text" onChange={onChange} /> <br/>
            <input name="password" placeholder="password" type="password" onChange={onChange} /> <br/>
            <input name="repeatPassword" placeholder="repeatPassword" type="password" onChange={onChange} /> 
-            <button onClick={onSubmit}>Submit</button>
+           <button className={loading? 'loading': ''} >Register</button>
+           </form>
         </div>
     )
 }
