@@ -2,7 +2,9 @@ import React from 'react'
 import {connect} from 'react-redux'
 
 const mapState =(state)=> ({userInfo: state.auth.userInfo})
-const Home = ({userInfo}) => {
+const Home = (props) => {
+    const {userInfo} = props
+    console.log(props);
     
     return (
         <div>

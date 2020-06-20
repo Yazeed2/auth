@@ -4,7 +4,7 @@ import {alertError, alertSuccess} from '../components/alerts/alerts';
 import {registerCompleted} from '../components/alerts/Messages/success';
 import { getByLabelText } from '@testing-library/react';
 
-export const register = (userInfo) => new Promise( async (resolve, reject)=>{
+export const register = (userInfo, history) => new Promise( async (resolve, reject)=>{
     const {email, password} = userInfo;
     auth.createUserWithEmailAndPassword(email, password)
     .then(userSnap => {
@@ -12,7 +12,7 @@ export const register = (userInfo) => new Promise( async (resolve, reject)=>{
         delete userInfo.repeatPassword;
         const uid = userSnap.user.uid;
         firestore.collection('users').doc(uid).set({...userInfo})
-        .then(done =>{
+        .then(() => {
             userInfo.uid = uid
             resolve(userInfo);
             alertSuccess(registerCompleted);

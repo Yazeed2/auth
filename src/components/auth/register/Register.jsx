@@ -4,6 +4,7 @@ import {alertError, alertSuccess} from '../../alerts/alerts'
 import {passwordDoesntMatch, requiredFields} from '../../alerts/Messages/error'
 import {connect} from 'react-redux'; 
 import {setUserInfoAction} from '../authActions'
+import { useHistory } from 'react-router-dom'
 
 
 
@@ -15,11 +16,14 @@ const actions = {
 }
 
 function Register(props) {
+    let history = useHistory()
     const [userInfo, setUserInfo] = useState({})
     const [loading, setLoading] = useState(false)
     const onChange = (e) => {
         setUserInfo({...userInfo, [e.target.name]:e.target.value})
     }
+    console.log(props );
+    
     const required = ['email', 'password', 'repeatPassword'] // add your required fields
     const onSubmit = async(e) => {
         e.preventDefault()
@@ -34,6 +38,7 @@ function Register(props) {
                 try{
                     let user = await register(userInfo)
                     props.setUserInfoAction(user)
+                    history.push('/')
                 }catch { 
 
                 }

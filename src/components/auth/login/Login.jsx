@@ -3,21 +3,22 @@ import {alertError} from '../../alerts/alerts'
 import {loginInfoMissing} from '../../alerts/Messages/error'
 import {login} from '../../../firebase/auth'
 import Loading from '../../loading/Loading'
+import {useHistory} from 'react-router-dom';
 
 export default function Login() {
-
+ let history = useHistory()   
  const [userInfo, setUserInfo] = useState({})
  const [loading, setLoading] = useState(false)
  const onFeildChange = (e)=> {
     setUserInfo({...userInfo, [e.target.name]: e.target.value})
  }
  const onSubmit = async(e) => { 
-     e.preventDefault()
+     e.preventDefault();
     if(userInfo.password && userInfo.email){ 
         setLoading(true)
         try{
-
-            await login(userInfo)
+            await login(userInfo);
+            history.push('/')
         }catch { 
 
         }
