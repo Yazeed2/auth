@@ -55,13 +55,15 @@ function Register(props) {
     
     return (
         <div>
-            register <br/>
+            <h1>Register</h1>
+             
+
             <form onSubmit={onSubmit}>
-           <input name="email" placeholder="Email" type="text" onChange={onChange} /> <br/>
-           <input name="moreData" placeholder="moreData" type="text" onChange={onChange} /> <br/>
-           <input name="addional" placeholder="addional" type="text" onChange={onChange} /> <br/>
-           <input name="password" placeholder="password" type="password" onChange={onChange} /> <br/>
-           <input name="repeatPassword" placeholder="repeatPassword" type="password" onChange={onChange} /> 
+           <input name="email" placeholder="Email" type="text" onChange={onChange} /> 
+           <input name="moreData" placeholder="Name" type="text" onChange={onChange} /> 
+           <input name="addional" placeholder="Addional" type="text" onChange={onChange} /> 
+           <input name="password" placeholder="Password" type="password" onChange={onChange} /> 
+           <input name="repeatPassword" placeholder="Repeat password" type="password" onChange={onChange} /> 
            <button className={loading? 'loading': ''} >Register</button>
            </form>
         </div>

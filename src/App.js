@@ -58,14 +58,14 @@ function App(props) {
               <Link to="/">Home</Link>
             </li>
             {isLoggedIn?
-            <button onClick={()=>signOut(props.setUserInfoAction)}>logout</button>
+            <button onClick={()=>signOut(props.setUserInfoAction)}>Logout</button>
             :
             <>
             <li>
-              <Link to="/login">login</Link>
+              <Link to="/login">Login</Link>
             </li>
             <li>
-              <Link to="/register">register</Link>
+              <Link to="/register">Register</Link>
             </li>
             </>
             }

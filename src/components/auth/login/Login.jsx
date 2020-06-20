@@ -29,12 +29,13 @@ export default function Login() {
  }
     return (
         <div>
-            login 
+            <h1>Login</h1>
+             
             {loading? <Loading/>: ''}
             <form onSubmit={onSubmit} >
-           <input onChange={onFeildChange} name="email" placeholder="Email" type="email"/> <br/>
-            <input onChange={onFeildChange} name="password" placeholder="password" type="password"/> <br/>
-            <button className={loading? 'loading': ''} >login</button>
+           <input onChange={onFeildChange} name="email" placeholder="Email" type="email"/> 
+            <input onChange={onFeildChange} name="password" placeholder="Password" type="password"/> 
+            <button className={loading? 'loading': ''} >Login</button>
             </form>
 
         </div>

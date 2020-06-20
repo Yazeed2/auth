@@ -1,5 +1,81 @@
+body { 
+  background: #e8eff5;
+  font-family: "Helvetica Neue", sans-serif;
+  font-weight: 300;
+  font-size: 24px;
+  letter-spacing: 2px;
+  margin: 48px 0;
+  color: #525252;
+}
 
+button, input {
+  background: #e8eff5;
+  padding: 5px 15px; 
+
+  border-radius: 8px;
+
+  box-shadow: 7px 7px 15px #bbcfda, -4px -4px 13px #fff,
+    inset 4px 4px 8px rgba(209, 217, 230, 0.2),
+    inset -8px -8px 8px rgba(255, 255, 255, 0.2);
+
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  display: block;
+  margin: 25px auto;
+
+}
+h1 {
+  font-family: "Helvetica Neue", sans-serif;
+  font-weight: 300;
+  font-size: 24px;
+  letter-spacing: 2px;
+  color: #525252;
+  text-align: center;
+  margin-top: 10%;
+}
+
+input{ 
+  width:200px;
+  padding:10px 15px;
+  
+}
+input::placeholder { 
+  font-family: "Helvetica Neue", sans-serif;
+  font-weight: 400;
+  color: #525252;
+}
+button {
+  cursor: pointer;
+  font-family: "Helvetica Neue", sans-serif;
+  font-weight: 400;
+  color: #525252;
+}
+
+button:hover {
+  transform: translateY(2px);
+}
 .loading{ 
   cursor: wait;
  
+}
+form{
+  width:fit-content;
+  margin: 0 auto;
+}
+
+
+li{
+  display: inline;
+  margin: 10px
+}
+a{ 
+  text-decoration: none;
+  font-family: "Helvetica Neue", sans-serif;
+  font-weight: 300;
+  font-size: 24px;
+  letter-spacing: 2px;
+  color: #525252;
+}
+a:hover{ 
+  color: black;
+
 }
