@@ -16,12 +16,12 @@ const actions = {
 
 function Register(props) {
     const [userInfo, setUserInfo] = useState({})
-
+    const [loading, setLoading] = useState(false)
     const onChange = (e) => {
         setUserInfo({...userInfo, [e.target.name]:e.target.value})
     }
     const required = ['email', 'password', 'repeatPassword'] // add your required fields
-    const onSubmit = async() => {
+    const onSubmit = async(e) => {
         e.preventDefault()
 
         let missingFields = []
@@ -30,9 +30,14 @@ function Register(props) {
         })
         if(missingFields.length === 0){
             if(userInfo.password === userInfo.repeatPassword){
-                let user = await register(userInfo)
+                setLoading(true)
+                try{
+                    let user = await register(userInfo)
+                    props.setUserInfoAction(user)
+                }catch { 
 
-                props.setUserInfoAction(user)
+                }
+                setLoading(false)
             }else{
                 alertError(passwordDoesntMatch);
             }
