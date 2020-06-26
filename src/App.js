@@ -9,6 +9,7 @@ import {connect} from 'react-redux'
 import {setUserInfoAction} from './components/auth/authActions'
 import {auth, firestore} from './firebase/firebase'
 import Loading from './components/loading/Loading';
+import Navbar from './components/navbar/Navbar'
 
 const mapState = (state) =>({...state})
 const actions = { 
@@ -51,27 +52,8 @@ function App(props) {
     {loading? <Loading/> : 
     
     <div className="App">
-      
-     <nav>
-          <ul>
-            <li>
-              <Link to="/">Home</Link>
-            </li>
-            {isLoggedIn?
-            <button onClick={()=>signOut(props.setUserInfoAction)}>Logout</button>
-            :
-            <>
-            <li>
-              <Link to="/login">Login</Link>
-            </li>
-            <li>
-              <Link to="/register">Register</Link>
-            </li>
-            </>
-            }
-            
-          </ul>
-          </nav>
+
+  <Navbar/>
      <Switch>
       
      <Route path='/login'> <Login/> </Route>
