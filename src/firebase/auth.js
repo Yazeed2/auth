@@ -3,6 +3,9 @@ import {auth, firestore} from './firebase';
 import {alertError, alertSuccess} from '../components/alerts/alerts'; 
 import {registerCompleted} from '../components/alerts/Messages/success';
 import { getByLabelText } from '@testing-library/react';
+import {store} from '../index'; 
+
+
 
 export const register = (userInfo, history) => new Promise( async (resolve, reject)=>{
     const {email, password} = userInfo;
@@ -49,3 +52,7 @@ export const login = async ({email, password}) => new Promise( async (resolve, r
     }
   
 })
+
+export const getUserInfo = () => {
+    return store.getState().auth 
+}

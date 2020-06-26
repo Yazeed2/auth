@@ -1,5 +1,6 @@
 import React from 'react'
 import {connect} from 'react-redux'
+import {getUserInfo} from '../../firebase/auth'
 
 const mapState =(state)=> ({userInfo: state.auth.userInfo})
 const Home = (props) => {
@@ -12,7 +13,7 @@ const Home = (props) => {
         email: {userInfo.email} <br/> 
         uid : {userInfo.uid}
      </>: 'please login or register'} 
-            
+            <button onClick={getUserInfo}>click me</button>
         </div>
     )
 }
